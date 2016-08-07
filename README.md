@@ -4,7 +4,7 @@ Accessing the user's preferences in terms of tracking can be slightly complicate
 
 ## Install
 
-npm install --save donottrack
+`npm install --save donottrack`
 
 ## Usage
 
