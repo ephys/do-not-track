@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-  var def = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+  var def = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
   var doNotTrack = window.doNotTrack || window.navigator.doNotTrack || window.navigator.msDoNotTrack;
 
