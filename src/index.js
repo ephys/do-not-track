@@ -37,3 +37,4 @@ export function getBrowserDnt() {
 
   return window.doNotTrack || window.navigator.doNotTrack || window.navigator.msDoNotTrack;
 }
+
