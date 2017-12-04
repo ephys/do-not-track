@@ -13,7 +13,7 @@ Browser:
 ```javascript
 import doNotTrack from 'donottrack';
 
-// Returns false if the user agrees to being tracked, true otherwise.
+// Returns true if the user do not want to be tracked, false otherwise.
 const do_not_track = doNotTrack(/* default, if preferences are not set. */ false);
 ```
 
