@@ -1,10 +1,10 @@
 
 /**
- * Returns true if the user agrees to being tracked, false if not, def if unspecified.
+ * Returns false if the user agrees to being tracked, true if not, def if unspecified.
  *
  * @param {!string} [dntHeader] The DNT header.
  * @param {!boolean} [def = false] The value to return if doNotTrack is unspecified.
- * @returns {!boolean} The user agrees to being tracked.
+ * @returns {!boolean} The user do not agree to being tracked.
  */
 export default function mayTrack(dntHeader, def = false) {
 

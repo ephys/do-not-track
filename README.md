@@ -13,8 +13,8 @@ Browser:
 ```javascript
 import doNotTrack from 'donottrack';
 
-// Returns true if the user agrees to being tracked, false otherwise.
-const mayTrack = doNotTrack(/* default, if preferences are not set. */ true);
+// Returns true if the user do not want to be tracked, false otherwise.
+const do_not_track = doNotTrack(/* default, if preferences are not set. */ false);
 ```
 
 Node:
@@ -22,5 +22,5 @@ Node:
 ```javascript
 import doNotTrack from 'donottrack';
 
-const mayTrack = doNotTrack(req.header('DNT'), true);
+const do_not_track = doNotTrack(req.header('DNT'), false);
 ```
