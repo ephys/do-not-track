@@ -1,28 +1,32 @@
-
 /**
- * Returns true if the user agrees to being tracked, false if not, def if unspecified.
+ * Returns true if the user does not want to be tracked, false otherwise, def if unspecified.
  *
- * @param {!string} [dntHeader] The DNT header.
- * @param {!boolean} [def = false] The value to return if doNotTrack is unspecified.
- * @returns {!boolean} The user agrees to being tracked.
+ * @param {Object} [headers] The request headers, when used on the server-side.
+ * @param {boolean} [def=false] The value to return if doNotTrack is unspecified.
+ * @returns {boolean} The user agrees to being tracked.
  */
-export default function mayTrack(dntHeader, def = false) {
-
-  // backward compatibility
-  if (typeof dntHeader === 'boolean') {
-    def = dntHeader;
+export default function doNotTrack(headers, def = false) {
+  // Dealing with optional headers parameter
+  if (arguments.length == 1 && typeof arguments[0] == 'boolean') {
+    headers = undefined;
+    def = arguments[0];
   }
 
-  if (typeof dntHeader !== 'string') {
-    dntHeader = getBrowserDnt();
+  var dnt;
+  if (headers !== undefined) {
+    // In Node.js headers keys are lowercased. Values are not modified
+    // cf. https://nodejs.org/api/http.html#http_http
+    dnt = headers.dnt;
+  } else {
+    dnt = getBrowserDnt();
   }
 
-  if (dntHeader != null) {
-    if (dntHeader.charAt(0) === '1' || dntHeader === 'yes') {
+  if (dnt) {
+    if (dnt.charAt(0) === '1' || dnt === 'yes') {
       return true;
     }
 
-    if (dntHeader.charAt(0) === '0' || dntHeader === 'no') {
+    if (dnt.charAt(0) === '0' || dnt === 'no') {
       return false;
     }
   }
@@ -37,4 +41,3 @@ export function getBrowserDnt() {
 
   return window.doNotTrack || window.navigator.doNotTrack || window.navigator.msDoNotTrack;
 }
-

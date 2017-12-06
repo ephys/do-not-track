@@ -4,10 +4,22 @@ const dnt = require('../lib/').default;
 // TODO transpile.
 // TODO run in real browsers.
 
-describe('do not track', () => {
+describe('do not track used from browsers', () => {
   beforeEach(() => {
     global.window = {};
     window.navigator = {};
+  });
+
+  afterEach(() => {
+    delete global.window;
+  });
+
+  it('should return false when nothing set', () => {
+    should(dnt()).equal(false);
+  });
+
+  it('should return true when nothing set, with default true', () => {
+    should(dnt(true)).equal(true);
   });
 
   it('should return false for firefox when disabled', () => {
@@ -52,11 +64,4 @@ describe('do not track', () => {
     should(dnt()).equal(true);
   });
 
-  it('should return true for HTTP Requests when enabled', () => {
-    should(dnt('1')).equal(true);
-  });
-
-  it('should return false for HTTP Requests when enabled', () => {
-    should(dnt('0')).equal(false);
-  });
 });
