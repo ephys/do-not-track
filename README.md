@@ -1,6 +1,9 @@
 # do-not-track
 
-Accessing the user's preferences in terms of tracking can be slightly complicated. This module simplifies that.
+Accessing the user's preferences in terms of tracking can be slightly
+complicated. This module simplifies that.
+
+[Read the spec](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/DNT)
 
 ## Install
 
@@ -13,14 +16,33 @@ Browser:
 ```javascript
 import doNotTrack from 'donottrack';
 
-// Returns true if the user agrees to being tracked, false otherwise.
-const mayTrack = doNotTrack(/* default, if preferences are not set. */ true);
+// Returns true if the user does not want to be tracked, false otherwise,
+// tracking allowed if nothing specified.
+const dnt = doNotTrack();
 ```
 
-Node:
+```javascript
+// Returns true if the user does not want to be tracked, false otherwise,
+// NO TRACKING allowed if nothing specified.
+const dnt = doNotTrack(true);
+```
+
+Node.js:
 
 ```javascript
 import doNotTrack from 'donottrack';
 
-const mayTrack = doNotTrack(req.header('DNT'), true);
+// Or alternative CommonJS import
+//const donottrack = require('donottrack').default;
+
+// Returns true if the user does not want to be tracked, false otherwise,
+// tracking allowed if nothing specified.
+const dnt = doNotTrack(req.headers);
 ```
+
+```javascript
+// Returns true if the user does not want to be tracked, false otherwise,
+// NO TRACKING allowed if nothing specified.
+const dnt = doNotTrack(req.headers, true);
+```
+
